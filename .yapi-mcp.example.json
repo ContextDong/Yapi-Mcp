@@ -1,0 +1,6 @@
+{
+  "base_url": "https://yapi.example.com",
+  "token": "YOUR_LOGIN_JWT_OR_PROJECT_OPEN_TOKEN",
+  "uid": null,
+  "timeout": 30
+}

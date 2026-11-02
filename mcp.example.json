@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "yapi": {
+      "command": "uvx",
+      "args": ["--from", "yapi-mcp", "yapi-mcp"],
+      "env": {
+        "YAPI_BASE_URL": "https://yapi.example.com",
+        "YAPI_TOKEN": "YOUR_LOGIN_JWT_OR_PROJECT_OPEN_TOKEN"
+      }
+    }
+  }
+}
