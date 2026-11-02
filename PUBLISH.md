@@ -45,4 +45,6 @@ https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.ContextDo
 
 ## Consumer install (after PyPI)
 
-See `mcp.example.json` / README (`uvx --from yapi-mcp yapi-mcp` + `YAPI_BASE_URL` / `YAPI_TOKEN`).
+See `mcp.example.json` / README (`uvx --from contextdong-yapi-mcp yapi-mcp` + `YAPI_BASE_URL` / `YAPI_TOKEN`).
+
+PyPI package name is `contextdong-yapi-mcp` because `yapi-mcp` is already taken.

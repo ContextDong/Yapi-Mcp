@@ -21,7 +21,7 @@ MCP server that fetches [YApi](https://github.com/YMFE/yapi) project API docs (J
   "mcpServers": {
     "yapi": {
       "command": "uvx",
-      "args": ["--from", "yapi-mcp", "yapi-mcp"],
+      "args": ["--from", "contextdong-yapi-mcp", "yapi-mcp"],
       "env": {
         "YAPI_BASE_URL": "https://yapi.example.com",
         "YAPI_TOKEN": "YOUR_LOGIN_JWT_OR_PROJECT_OPEN_TOKEN"
@@ -55,7 +55,7 @@ From Git (before / without PyPI):
 Or pip:
 
 ```bash
-pip install yapi-mcp
+pip install contextdong-yapi-mcp
 # or: pip install git+https://github.com/ContextDong/Yapi-Mcp
 ```
 
@@ -119,7 +119,8 @@ python -m yapi_mcp.server
 ## MCP Registry
 
 Official registry name: `io.github.ContextDong/yapi-mcp`  
-Package: PyPI `yapi-mcp` (stdio via `uvx` / `yapi-mcp`)
+Package: PyPI `contextdong-yapi-mcp` (stdio via `uvx` / `yapi-mcp`)  
+Note: the shorter name `yapi-mcp` is already taken on PyPI by another project.
 
 ## License
 
