@@ -1,0 +1,11 @@
+#!/bin/sh
+# Strip Cursor Agent attribution trailers so commits stay under the human author only.
+MSG_FILE="$1"
+if [ -z "$MSG_FILE" ] || [ ! -f "$MSG_FILE" ]; then
+  exit 0
+fi
+TMP_FILE="${MSG_FILE}.tmp"
+# Remove Co-authored-by / Made-with / Signed-off lines that mention Cursor agent
+grep -v -E -i 'cursoragent@cursor\.com|Co-authored-by:[[:space:]]*Cursor\b|Made with Cursor' "$MSG_FILE" > "$TMP_FILE" || true
+mv "$TMP_FILE" "$MSG_FILE"
+exit 0

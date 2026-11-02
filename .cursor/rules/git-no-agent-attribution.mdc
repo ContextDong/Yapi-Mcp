@@ -1,0 +1,12 @@
+---
+description: Git commits must use the human user account only; never Cursor Agent attribution
+alwaysApply: true
+---
+
+# Git authorship
+
+- All commits and PRs must use the human git user only (`dms` / the repo owner's account).
+- **Never** add `Co-authored-by: Cursor`, `cursoragent@cursor.com`, or "Made with Cursor" trailers.
+- Prefer `git commit` messages without any AI attribution footer.
+- If Cursor tooling injects a trailer anyway, strip it before push (repo `.githooks/commit-msg`).
+- Do not change `user.name` / `user.email` git config.
