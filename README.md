@@ -1,18 +1,20 @@
 # Yapi-Mcp
 
-MCP server that fetches [YApi](https://github.com/YMFE/yapi) project API docs (JSON request / JSON response) so coding agents can integrate client projects from a pasted YApi URL.
+从粘贴的 [YApi](https://github.com/YMFE/yapi) 项目地址拉取接口文档（JSON 请求 / JSON 响应），供编码 Agent 自动理解并对接客户端项目的 MCP Server。
+
+[English](README_EN.md)
 
 <!-- mcp-name: io.github.ContextDong/yapi-mcp -->
 
-## Features
+## 功能
 
-- Parse YApi page URLs → `base_url` / `project_id` / `interface_id`
-- List / search interfaces, export catalogs
-- Fetch normalized request & response JSON (JSON Schema / examples)
-- Auth: **login JWT** (Cookie `_yapi_token` + `_yapi_uid`) or **project open token**
-- **Dynamic credentials**: env, `.env`, `.yapi-mcp.json`, runtime `yapi_configure`, or per-tool args
+- 解析 YApi 页面 URL → `base_url` / `project_id` / `interface_id`
+- 列出 / 搜索接口，导出目录
+- 拉取归一化后的请求与响应 JSON（JSON Schema / 示例）
+- 鉴权：登录 JWT（Cookie `_yapi_token` + `_yapi_uid`）或项目 open token
+- **动态凭证**：环境变量、`.env`、`.yapi-mcp.json`、运行时 `yapi_configure`、或工具参数
 
-## Quick install (consumers)
+## 快速接入
 
 ### Cursor / Claude Desktop MCP
 
@@ -31,7 +33,7 @@ MCP server that fetches [YApi](https://github.com/YMFE/yapi) project API docs (J
 }
 ```
 
-From Git (before / without PyPI):
+从 Git 安装（不经 PyPI）：
 
 ```json
 {
@@ -52,63 +54,63 @@ From Git (before / without PyPI):
 }
 ```
 
-Or pip:
+或使用 pip：
 
 ```bash
 pip install contextdong-yapi-mcp
-# or: pip install git+https://github.com/ContextDong/Yapi-Mcp
+# 或: pip install git+https://github.com/ContextDong/Yapi-Mcp
 ```
 
-## Configure credentials (no secrets in repo)
+## 配置凭证（仓库内不存放密钥）
 
-Priority (high → low):
+优先级从高到低：
 
-1. Tool arguments (`token`, `base_url`)
-2. Runtime `yapi_configure` (in-memory for the MCP process)
-3. Environment / `.env` (`YAPI_BASE_URL`, `YAPI_TOKEN`, `YAPI_UID`, `YAPI_COOKIE`)
-4. Config file `.yapi-mcp.json` or path in `YAPI_MCP_CONFIG`
+1. 工具参数（`token`、`base_url`）
+2. 运行时 `yapi_configure`（仅当前 MCP 进程内存）
+3. 环境变量 / `.env`（`YAPI_BASE_URL`、`YAPI_TOKEN`、`YAPI_UID`、`YAPI_COOKIE`）
+4. 配置文件 `.yapi-mcp.json`，或 `YAPI_MCP_CONFIG` 指向的路径
 
-Copy examples:
+示例：
 
 ```bash
 cp .env.example .env
 cp .yapi-mcp.example.json .yapi-mcp.json
 ```
 
-| Variable | Description |
-|----------|-------------|
-| `YAPI_BASE_URL` | YApi host, e.g. `https://yapi.example.com` |
-| `YAPI_TOKEN` | Login JWT **or** project open token |
-| `YAPI_UID` | Optional; login JWT usually auto-parses `uid` |
-| `YAPI_COOKIE` | Optional raw `Cookie` header override |
-| `YAPI_MCP_CONFIG` | Optional path to JSON config file |
+| 变量 | 说明 |
+|------|------|
+| `YAPI_BASE_URL` | YApi 主机，如 `https://yapi.example.com` |
+| `YAPI_TOKEN` | 登录 JWT **或** 项目 open token |
+| `YAPI_UID` | 可选；登录 JWT 一般会自动解析 `uid` |
+| `YAPI_COOKIE` | 可选；原始 Cookie 头覆盖 |
+| `YAPI_MCP_CONFIG` | 可选；JSON 配置文件路径 |
 
-**Never commit** `.env`, `.yapi-mcp.json`, or real tokens.
+**切勿提交** `.env`、`.yapi-mcp.json` 或真实 token。
 
-## Tools
+## 工具列表
 
-| Tool | Purpose |
-|------|---------|
-| `yapi_configure` / `yapi_get_config` | Dynamic non-durable / inspect settings |
-| `yapi_parse_url` | Extract host + ids from a page URL |
-| `yapi_get_project` | Project metadata |
-| `yapi_list_interfaces` | Searchable interface index |
-| `yapi_get_interface` | Full JSON req/res for codegen |
-| `yapi_export_catalog` | Catalog (+ optional details) |
+| 工具 | 用途 |
+|------|------|
+| `yapi_configure` / `yapi_get_config` | 动态配置 / 查看非敏感配置 |
+| `yapi_parse_url` | 从页面 URL 解析主机与 id |
+| `yapi_get_project` | 项目元信息 |
+| `yapi_list_interfaces` | 可搜索的接口索引 |
+| `yapi_get_interface` | 单个接口完整 JSON 定义（便于写客户端） |
+| `yapi_export_catalog` | 导出目录（可选详情） |
 
-## Agent usage
+## Agent 用法
 
-Paste a project URL in chat:
+在对话中粘贴项目地址：
 
 ```text
-Integrate APIs from https://yapi.example.com/project/123/interface/api/
+根据 https://yapi.example.com/project/123/interface/api/ 对接登录相关接口
 ```
 
-The agent should configure credentials (if needed), list interfaces, pull details, then implement the client against your codebase conventions.
+Agent 应先配置凭证（如需要），再列表 / 拉详情，最后按目标工程现有风格实现客户端。
 
-Project skill (optional): `.cursor/skills/yapi-api-client/SKILL.md`
+可选 Skill：`.cursor/skills/yapi-api-client/SKILL.md`
 
-## Local development
+## 本地开发
 
 ```bash
 python -m pip install -e ".[dev]"
@@ -118,9 +120,9 @@ python -m yapi_mcp.server
 
 ## MCP Registry
 
-Official registry name: `io.github.ContextDong/yapi-mcp`  
-Package: PyPI `contextdong-yapi-mcp` (stdio via `uvx` / `yapi-mcp`)  
-Note: the shorter name `yapi-mcp` is already taken on PyPI by another project.
+- 官方名：`io.github.ContextDong/yapi-mcp`
+- PyPI 包：`contextdong-yapi-mcp`（`uvx` / 命令 `yapi-mcp`）
+- 说明：短名 `yapi-mcp` 在 PyPI 上已被其他项目占用
 
 ## License
 
